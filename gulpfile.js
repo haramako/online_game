@@ -12,7 +12,7 @@ gulp.task('browserify', function(){
 	return browserify({entries: ['./src/app.js'], debug: true, extensions: extensions})
 			.transform('babelify', {presets: ['es2015']})
 			.bundle()
-			.on("error", function (err) { console.log("Error : " + err.message); })
+			.on("error", function (err) { console.log("Error : " + err.message); this.emit('end'); })
 			.pipe(source('public/all.js'))
 			.pipe(gulp.dest('./'));
 });
